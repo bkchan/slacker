@@ -1,0 +1,3 @@
+#! /bin/bash
+
+python slacker.py >> slacker_out.log 2>> slacker_err.log &
