@@ -11,7 +11,7 @@ class google_tz_handler(slackbot_handler):
         return 'Google Time Zone'
 
     def get_commands_and_examples(self):
-        return (['Obtains current time in specified places or time zones.'], ['sm tz San Jose, CA'])
+        return (['Obtains current time in specified places or time zones.'], ['slacker tz San Jose, CA'])
 
     def can_handle(self, fulltext, tokens, edited):
         return tokens[1] == 'tz'
