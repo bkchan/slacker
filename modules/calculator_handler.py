@@ -8,7 +8,7 @@ class calculator_handler(slackbot_handler):
         return 'Calculator'
 
     def get_commands_and_examples(self):
-        return (['If the entire string is a mathematical expression, slacker will display the result -- note integer math unless floating point is used specifically.'], ['slacker (75.0 - 32) * 5/9'])
+        return (['<mathematical expression>'], ['slacker (75.0 - 32) * 5/9'])
 
     def can_handle(self, fulltext, tokens, edited):
         possible_calc_list = fulltext.split(' ', 1)
