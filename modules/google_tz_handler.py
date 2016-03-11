@@ -14,23 +14,26 @@ class google_tz_handler(slackbot_handler):
         return (['Obtains current time in specified places or time zones.'], ['sm tz San Jose, CA'])
 
     def can_handle(self, fulltext, tokens, edited):
-        return tokens[1] == 'tz' and len(tokens) > 2
+        return tokens[1] == 'tz'
 
     def handle(self, fulltext, tokens, slackclient, channel, user):
         del tokens[0]
         del tokens[0]
-        cities = self.get_cities('+'.join(tokens))
-        if (cities):
-            if len(cities) == 0:
-                slackclient.post_message(channel, 'No such place found')
+        if tokens:
+            cities = self.get_cities('+'.join(tokens))
+            if (cities):
+                if len(cities) == 0:
+                    slackclient.post_message(channel, 'No such place found')
+                else:
+                    output = ''
+                    for city in cities:
+                        city_string = unicodedata.normalize('NFKD', city['address']).encode('ascii','ignore')
+                        output += 'Local time at *' + city_string + '* is `' + self.get_local_time(city) + '`\n'
+                    slackclient.post_message(channel, output)
             else:
-                output = ''
-                for city in cities:
-                    city_string = unicodedata.normalize('NFKD', city['address']).encode('ascii','ignore')
-                    output += 'Local time at *' + city_string + '* is `' + self.get_local_time(city) + '`\n'
-                slackclient.post_message(channel, output)
+                slackclient.post_message(channel, 'No such place found')
         else:
-            slackclient.post_message(channel, 'No such place found')
+            slackclient.post_message(channel, 'Missing place name')
 
     def get_cities(self, city):
         try:
