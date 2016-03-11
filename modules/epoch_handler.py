@@ -12,7 +12,7 @@ class epoch_handler(slackbot_handler):
         return 'Epoch'
 
     def get_commands_and_examples(self):
-        return (['slacker can also do epoch-to-time conversions.'], ['slacker 1456184562'])
+        return (['<epoch time>'], ['slacker 1456184562'])
 
     def can_handle(self, fulltext, tokens, edited):
         possible_epoch_list = fulltext.split(' ', 1)
