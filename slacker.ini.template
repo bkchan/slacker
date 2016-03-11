@@ -1,0 +1,14 @@
+[Configuration]
+token=           # get one from Slack
+daemon_name=slacker_daemon
+modules_location=modules
+handler_list=epoch_handler calculator_handler google_tz_handler
+keywords=slacker Slacker
+helpword=help
+
+[Epoch]
+; additional_location requires google_tz_handler module
+additional_location=San Jose, CA, USA
+
+[Google]
+google_token=    # get one from Google
