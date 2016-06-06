@@ -15,8 +15,8 @@ class epoch_handler(slackbot_handler):
         return (['<epoch time>'], ['slacker 1456184562'])
 
     def can_handle(self, fulltext, tokens, edited):
-        possible_epoch_list = fulltext.split(' ', 1)
-        epoch_string = possible_epoch_list[1].strip()
+        possible_epoch_list = ' '.join(tokens)
+        epoch_string = possible_epoch_list.strip()
         self._epoch = None
         if not set(epoch_string).issubset(set('0123456789')):
             epoch_string = None
