@@ -14,10 +14,9 @@ class google_tz_handler(slackbot_handler):
         return (['`tz` <place name>'], ['slacker tz San Jose, CA'])
 
     def can_handle(self, fulltext, tokens, edited):
-        return tokens[1] == 'tz'
+        return tokens[0] == 'tz'
 
     def handle(self, fulltext, tokens, slackclient, channel, user):
-        del tokens[0]
         del tokens[0]
         if tokens:
             cities = self.get_cities('+'.join(tokens))
