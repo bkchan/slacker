@@ -11,8 +11,8 @@ class calculator_handler(slackbot_handler):
         return (['<mathematical expression>'], ['slacker (75.0 - 32) * 5/9'])
 
     def can_handle(self, fulltext, tokens, edited):
-        possible_calc_list = fulltext.split(' ', 1)
-        self._calc_string = possible_calc_list[1].strip()
+        possible_calc_list = ' '.join(tokens)
+        self._calc_string = possible_calc_list.strip()
         if not set(self._calc_string).issubset(set(' 0123456789().+-*/')):
             self._calc_string = None
         return self._calc_string
