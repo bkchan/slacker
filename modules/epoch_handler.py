@@ -14,7 +14,7 @@ class epoch_handler(slackbot_handler):
     def get_commands_and_examples(self):
         return (['<epoch time>'], ['slacker 1456184562'])
 
-    def can_handle(self, fulltext, tokens, edited):
+    def can_handle(self, data, fulltext, tokens, edited):
         possible_epoch_list = ' '.join(tokens)
         epoch_string = possible_epoch_list.strip()
         self._epoch = None
@@ -26,7 +26,7 @@ class epoch_handler(slackbot_handler):
                 self._epoch = epoch
         return self._epoch
 
-    def handle(self, fulltext, tokens, slackclient, channel, user):
+    def handle(self, data, fulltext, tokens, slackclient, channel, user):
         slackclient.post_message(channel, 'UTC: `' + time.strftime('%Y/%m/%d-%H:%M:%S', time.gmtime(self._epoch)) + '`')
         if self._additional_location and 'modules.google_tz_handler' in sys.modules:
             handler_module = sys.modules['modules.google_tz_handler']
