@@ -10,14 +10,14 @@ class calculator_handler(slackbot_handler):
     def get_commands_and_examples(self):
         return (['<mathematical expression>'], ['slacker (75.0 - 32) * 5/9'])
 
-    def can_handle(self, fulltext, tokens, edited):
+    def can_handle(self, data, fulltext, tokens, edited):
         possible_calc_list = ' '.join(tokens)
         self._calc_string = possible_calc_list.strip()
         if not set(self._calc_string).issubset(set(' 0123456789().+-*/')):
             self._calc_string = None
         return self._calc_string
 
-    def handle(self, fulltext, tokens, slackclient, channel, user):
+    def handle(self, data, fulltext, tokens, slackclient, channel, user):
         try:
             expression = eval(self._calc_string, {"__builtins__":None})
             slackclient.post_message(channel, str(expression))
