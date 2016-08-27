@@ -27,7 +27,7 @@ class google_tz_handler(slackbot_handler):
                     output = ''
                     for city in cities:
                         city_string = unicodedata.normalize('NFKD', city['address']).encode('ascii','ignore')
-                        output += 'Local time at *' + city_string + '* is `' + self.get_local_time(city) + '`\n'
+                        output += 'Local time at *' + city_string + '* is `' + self.get_local_time(city, int(time.time())) + '`\n'
                     slackclient.post_message(channel, output)
             else:
                 slackclient.post_message(channel, 'No such place found')
@@ -62,5 +62,5 @@ class google_tz_handler(slackbot_handler):
         except Exception as e:
             return None
 
-    def get_local_time(self, city, t = int(time.time())):
+    def get_local_time(self, city, t):
         return time.asctime(time.gmtime(self.get_raw_local_time(city, t))) 
